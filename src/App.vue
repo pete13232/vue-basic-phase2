@@ -1,26 +1,52 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <header>
+    <h1>ระบบจัดการข้อมูลพนักงาน</h1>
+  </header>
+  <section class="employee-content">
+    <h2>ข้อมูลพนักงาน</h2>
+    <ListData />
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ListData from "./components/ListData.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ListData,
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: purple;
+  color: white;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.employee-content {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  margin: 3rem;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.employee-content h2{
+  font-size: 2rem;
+  border-bottom: 4px solid #ccc;
+  color:purple;
+  margin: 0 0 1rem 0;
 }
 </style>
