@@ -30,15 +30,15 @@
     <div class="form-control">
       <h2>ทักษะด้านภาษา</h2>
       <div>
-        <input type="checkbox" value="ภาษาอังกฤษ" v-model="employee.skill"/>
+        <input type="checkbox" value="ภาษาอังกฤษ" v-model="employee.skill" />
         <label for="gender-name">ภาษาอังกฤษ</label>
       </div>
       <div>
-        <input type="checkbox" value="ภาษาจีน" v-model="employee.skill"/>
+        <input type="checkbox" value="ภาษาจีน" v-model="employee.skill" />
         <label for="gender-name">ภาษาจีน</label>
       </div>
       <div>
-        <input type="checkbox" value="ภาษาญี่ปุ่น" v-model="employee.skill"/>
+        <input type="checkbox" value="ภาษาญี่ปุ่น" v-model="employee.skill" />
         <label for="gender-name">ภาษาญี่ปุ่น</label>
       </div>
     </div>
@@ -58,15 +58,30 @@ export default {
         salary: 0,
         department: "ฝ่ายการตลาด",
         gender: "",
-        skill:[],
+        skill: [],
       },
     };
   },
-  methods:{
-    submitForm(){
-      console.log(this.employee)
-    }
-  }
+  methods: {
+    submitForm() {
+      const newEmployee = {
+        name: this.employee.name,
+        salary: this.employee.salary,
+        department: this.employee.department,
+        gender: this.employee.gender,
+        skill: this.employee.skill,
+      };
+      this.$emit("save", newEmployee);
+      this.resetForm();
+    },
+    resetForm() {
+      this.employee.name = "";
+      this.employee.salary = 0;
+      this.employee.department="ฝ่ายการตลาด";
+      this.employee.gender="";
+      this.employee.skill="";
+    },
+  },
 };
 </script>
 
@@ -105,7 +120,8 @@ button {
   border-radius: 10px;
 }
 
-input[type="radio"],input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
   display: inline-block;
   width: auto;
   margin-right: 1rem;

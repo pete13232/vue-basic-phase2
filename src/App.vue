@@ -2,21 +2,32 @@
   <header>
     <h1>ระบบจัดการข้อมูลพนักงาน</h1>
   </header>
-  <FormComponent/>
-  <section class="employee-content">
+  <FormComponent @save="insertEmployee" />
+  <section class="employee-content" v-if="employees.length > 0">
     <h2>ข้อมูลพนักงาน</h2>
-    <ListData />
+    <ListData :employees="employees"/>
   </section>
 </template>
 
 <script>
 import ListData from "./components/ListData.vue";
-import FormComponent from './components/FormComponent.vue';
+import FormComponent from "./components/FormComponent.vue";
 export default {
   name: "App",
   components: {
     ListData,
     FormComponent,
+  },
+  data() {
+    return {
+      employees: [],
+    };
+  },
+  methods: {
+    insertEmployee(data) {
+      this.employees.push(data);
+      console.log(data)
+    },
   },
 };
 </script>
@@ -46,10 +57,10 @@ header {
   text-align: center;
 }
 
-.employee-content h2{
+.employee-content h2 {
   font-size: 2rem;
   border-bottom: 4px solid #ccc;
-  color:purple;
+  color: purple;
   margin: 0 0 1rem 0;
 }
 </style>
