@@ -1,17 +1,29 @@
 <template>
-  <li>
-    <h1>ชื่อ: {{ name }}</h1>
-    <button>ดูรายละเอียด</button> &nbsp;
-    <button>ลบข้อมูล</button>
-    <div v-show="isVisible">
-      <p>เงินเดือน : {{ salary }} บาท, ตำแหน่งงาน : {{ department }}</p>
-    </div>
-  </li>
+  <Card>
+    <template v-slot:card-header>
+      <h1>ชื่อ: {{ name }}</h1>
+    </template>
+    <template v-slot:card-button>
+      <button @click="showDescription(id)">ดูรายละเอียด</button> &nbsp;
+      <button @click="deleteEmployee(id)">ลบข้อมูล</button>
+    </template>
+    <template v-slot:card-content>
+      <transition name="fade">
+        <div v-show="isVisible">
+          <p>เงินเดือน : {{ salary }} บาท, ตำแหน่งงาน : {{ department }}</p>
+        </div>
+      </transition>
+    </template>
+  </Card>
 </template>
 
 <script>
+import Card from "./Card.vue";
 export default {
   name: "Person",
+  components: {
+    Card,
+  },
   props: {
     id: {
       type: Number,
@@ -32,34 +44,42 @@ export default {
       type: Boolean,
     },
   },
+  methods: {
+    showDescription(id) {
+      this.$emit("show", id);
+    },
+    deleteEmployee(id) {
+      this.$emit("delete", id);
+    },
+  },
 };
 </script>
 
 <style scoped>
-li{
+/* li {
   margin: 1rem 0;
   font-size: 1.25rem;
   font-weight: bold;
   background: #8ddba4;
   padding: 0.5rem;
   border-radius: 25px;
-}
+} */
 
-button{
-  font:inherit;
+button {
+  font: inherit;
   cursor: pointer;
   border: 1px solid #ff0077;
   background: #ff0077;
   color: white;
   padding: 0.05rem 1rem;
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.26);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
+}
 
+.fade-enter-from {
+  opacity: 0;
+}
 
-
-
-
-
-
-  
+.fade-enter-active {
+  transition: all 0.5s linear;
 }
 </style>
